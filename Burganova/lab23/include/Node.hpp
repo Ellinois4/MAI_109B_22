@@ -4,17 +4,22 @@
 #include <iostream>
 
 template <typename T>
-class BinTree;
-
-template <typename T>
 class Node {
-    friend class BinTree<T>;
 private:
     T data;
-    Node<T>* leftNode = nullptr;
-    Node<T>* rightNode = nullptr;
+    Node<T>* left_node = nullptr;
+    Node<T>* right_node = nullptr;
 
+public:
     Node(const T&);
+
+    T& get_data();
+    
+    Node<T>* get_left_node();
+    Node<T>* get_right_node();
+
+    void set_left_node(Node<T>* left);
+    void set_right_node(Node<T>* right);
 };
 
 #include "../src/Node.cpp"

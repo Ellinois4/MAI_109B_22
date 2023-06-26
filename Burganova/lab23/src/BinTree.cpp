@@ -8,18 +8,18 @@ BinTree<T>::BinTree(const T& data) {
 
 template <typename T>
 void BinTree<T>::insert(const T& data, Node<T>* node) {
-    if (data < node->data) {
-        if (node->leftNode == nullptr) {
-            node->leftNode = new Node<T>(data);
+    if (data < node->get_data()) {
+        if (node->get_left_node() == nullptr) {
+            node->set_left_node(new Node<T>(data));
         } else {
-            insert(data, node->leftNode);
+            insert(data, node->get_left_node());
         }
     }
-    if (data > node->data) {
-        if (node->rightNode == nullptr) {
-            node->rightNode = new Node<T>(data);
+    if (data > node->get_data()) {
+        if (node->get_right_node() == nullptr) {
+            node->set_right_node(new Node<T>(data));
         } else {
-            insert(data, node->rightNode);
+            insert(data, node->get_right_node());
         }
     }
     return;
@@ -31,9 +31,10 @@ void BinTree<T>::clear(Node<T>* node) {
         return;
     }
 
-    clear(node->leftNode); 
-    clear(node->rightNode);
+    clear(node->get_left_node()); 
+    clear(node->get_right_node());
     delete node;
+    node = nullptr;
 }
 
 template <typename T>
@@ -42,30 +43,30 @@ BinTree<T>::~BinTree() {
 }
 
 template <typename T>
-Node<T>* BinTree<T>::getRoot() {
+Node<T>* BinTree<T>::get_root() const {
     return root;
 }
 
 template <typename T>
-void BinTree<T>::bypass_check(Node<T>* node, int begin, int end, bool& flag) {
+void BinTree<T>::bypass(Node<T>* node, int begin, int end, bool& flag) const {
     if (node == nullptr) {
         return;
     }
 
-    bypass_check(node->leftNode, begin, end, flag);
-    if ((node->leftNode == nullptr)&& (node->rightNode == nullptr) && !((begin <= node->data) && (node->data <= end))) {
+    bypass(node->get_left_node(), begin, end, flag);
+    if ((node->get_left_node() == nullptr)&& (node->get_right_node() == nullptr) && !((begin <= node->get_data()) && (node->get_data() <= end))) {
         flag = false;
     }
-    bypass_check(node->rightNode, begin, end, flag);
+    bypass(node->get_right_node(), begin, end, flag);
 }
 
 template <typename T>
-void BinTree<T>::all_leafs_in_range(int begin, int end) {
+bool BinTree<T>::task(int begin, int end) const {
     bool flag = true;
-    bypass_check(root, begin, end, flag);
+    bypass(root, begin, end, flag);
     if (flag) {
-        std::cout << "All leafs of the tree are in range" << '\n';
+        return true;
     } else {
-        std::cout << "No/not all leafs of the tree are in range" << '\n';
+        return false;
     }
 }

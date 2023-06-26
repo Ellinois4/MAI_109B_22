@@ -3,14 +3,15 @@
 
 int main() {
     BinTree<int> tree(40);
+    bool result;
 
-    tree.insert(15, tree.getRoot());
-    tree.insert(6, tree.getRoot());
-    tree.insert(20, tree.getRoot());
-    tree.insert(50, tree.getRoot());
-    tree.insert(45, tree.getRoot());
-    tree.insert(52, tree.getRoot());
+    tree.insert(15, tree.get_root());
+    tree.insert(6, tree.get_root());
+    tree.insert(20, tree.get_root());
+    tree.insert(50, tree.get_root());
+    tree.insert(45, tree.get_root());
+    tree.insert(55, tree.get_root());
 
-    tree.all_leafs_in_range(5, 60);
-
+    result = tree.task(5, 60);
+    std::cout << result << '\n';
 }

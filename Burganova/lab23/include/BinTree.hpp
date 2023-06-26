@@ -7,16 +7,17 @@ template <typename T>
 class BinTree {
 private:
     Node<T>* root = nullptr; 
+
     void clear(Node<T>*);
 
 public:
     BinTree() = default;
     BinTree(const T&);
     ~BinTree();
-    Node<T>* getRoot(); 
+    Node<T>* get_root() const; 
     void insert(const T&, Node<T>* node); 
-    void bypass_check(Node<T>*, int, int, bool&);
-    void all_leafs_in_range(int, int);
+    void bypass(Node<T>*, int, int, bool&) const;
+    bool task(int, int) const;
 };
 
 #include "../src/BinTree.cpp"
