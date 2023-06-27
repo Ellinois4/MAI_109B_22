@@ -2,7 +2,7 @@
 #define STACK_HPP_INCLUDED
 
 #include <iostream>
-#include "Vector.hpp"
+#include "../../KP7/include/Vector.hpp"
 
 template <typename T>
 class Stack {
